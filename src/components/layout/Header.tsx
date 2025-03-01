@@ -29,7 +29,7 @@ export async function Header() {
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <span className="text-2xl font-bold bg-clip-text bg-gradient-to-r from-primary to-primary-foreground">
-              CineMind
+              Alperen
             </span>
           </Link>
 
