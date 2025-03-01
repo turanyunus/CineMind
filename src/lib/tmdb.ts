@@ -137,7 +137,7 @@ const tmdbService = {
   async getMovieCredits(id: number): Promise<TMDBCredits | null> {
     try {
       const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.TMDB_API_KEY}&language=tr-TR`
+        `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=tr-TR`
       );
       const data = await res.json();
       return data;
