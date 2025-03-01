@@ -62,6 +62,8 @@ export interface TMDBMovie {
   budget?: number;
   revenue?: number;
   runtime?: number;
+  original_language?: string;
+  tagline?: string;
   production_companies?: {
     id: number;
     name: string;

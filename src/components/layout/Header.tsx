@@ -28,7 +28,7 @@ export async function Header() {
       <nav className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-foreground">
+            <span className="text-2xl font-bold bg-clip-text bg-gradient-to-r from-primary to-primary-foreground">
               CineMind
             </span>
           </Link>
@@ -193,7 +193,7 @@ export async function Header() {
             <SheetContent side="right" className="w-[80vw] sm:w-[350px]">
               <div className="flex flex-col gap-6 mt-8">
                 <Link href="/" className="flex items-center gap-2">
-                  <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-foreground">
+                  <span className="text-xl font-bold bg-clip-text bg-gradient-to-r from-primary to-primary-foreground">
                     CineMind
                   </span>
                 </Link>

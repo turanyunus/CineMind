@@ -32,6 +32,9 @@ import {
   Menu,
   ChevronRight,
   Info,
+  Sparkles,
+  Flame,
+  Crown,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Layout } from "@/components/layout/Layout";
@@ -55,78 +58,186 @@ export function HomeClient({
 }: HomeClientProps) {
   return (
     <Layout>
-      {/* Featured Content */}
-      <section className="relative min-h-[75vh] flex items-end">
-        <div className="absolute inset-0">
-          {featuredContent?.backdrop_path && (
-            <Image
-              src={`https://image.tmdb.org/t/p/original${featuredContent.backdrop_path}`}
-              alt={
-                featuredContent.title ||
-                featuredContent.name ||
-                "Featured Content"
-              }
-              fill
-              className="object-cover brightness-75"
-              priority
-            />
-          )}
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/50 to-transparent" />
-        </div>
+      {/* Hero Section - New Design */}
+      <section className="pt-12 pb-8 bg-gradient-to-b from-primary/10 via-primary/5 to-background">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Welcome Card */}
+            <Card className="col-span-1 lg:col-span-2 overflow-hidden border-none shadow-xl bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-sm relative">
+              <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+              <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-primary/5 rounded-full blur-3xl"></div>
 
-        <div className="relative container mx-auto pb-16 pt-32 px-4">
-          <div className="flex flex-col md:flex-row gap-8 items-end">
-            {/* Poster */}
-            <div className="hidden md:block w-[240px] shrink-0">
+              <CardContent className="p-8 relative z-10">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  className="space-y-6"
+                >
+                  <div className="space-y-2">
+                    <motion.h1
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.6, delay: 0.2 }}
+                      className="text-3xl md:text-4xl font-bold"
+                    >
+                      <span className="bg-clip-text  bg-gradient-to-r from-primary to-primary-foreground">
+                        Hoş Geldiniz
+                      </span>
+                    </motion.h1>
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.6, delay: 0.3 }}
+                      className="text-lg text-muted-foreground"
+                    >
+                      Milyonlarca film ve dizi. Keşfedin ve takip edin.
+                    </motion.p>
+                  </div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                    className="grid grid-cols-1 md:grid-cols-2 gap-4"
+                  >
+                    <Link href="/movies/popular">
+                      <Button className="w-full h-auto py-6 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg group relative overflow-hidden">
+                        <div className="absolute inset-0 bg-white/10 w-full transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
+                        <div className="flex flex-col items-center text-center relative z-10">
+                          <Film className="w-6 h-6 mb-2 group-hover:scale-110 transition-transform" />
+                          <span className="text-base font-medium">
+                            Popüler Filmler
+                          </span>
+                          <span className="text-xs text-white/80 mt-1">
+                            En çok izlenen filmler
+                          </span>
+                        </div>
+                      </Button>
+                    </Link>
+                    <Link href="/shows/popular">
+                      <Button
+                        variant="outline"
+                        className="w-full h-auto py-6 border-primary/20 bg-primary/5 hover:bg-primary/10 shadow-lg group relative overflow-hidden"
+                      >
+                        <div className="absolute inset-0 bg-primary/10 w-full transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
+                        <div className="flex flex-col items-center text-center relative z-10">
+                          <Tv className="w-6 h-6 mb-2 text-primary group-hover:scale-110 transition-transform" />
+                          <span className="text-base font-medium">
+                            Popüler Diziler
+                          </span>
+                          <span className="text-xs text-muted-foreground mt-1">
+                            Trend olan diziler
+                          </span>
+                        </div>
+                      </Button>
+                    </Link>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
+                    className="grid grid-cols-2 md:grid-cols-4 gap-4"
+                  >
+                    <Link href="/recommendations">
+                      <Button
+                        variant="ghost"
+                        className="w-full h-auto py-4 hover:bg-primary/5 flex flex-col items-center group"
+                      >
+                        <div className="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                          <Sparkles className="w-5 h-5 text-yellow-500" />
+                        </div>
+                        <span className="text-sm">Öneriler</span>
+                      </Button>
+                    </Link>
+                    <Link href="/chat">
+                      <Button
+                        variant="ghost"
+                        className="w-full h-auto py-4 hover:bg-primary/5 flex flex-col items-center group"
+                      >
+                        <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                          <Zap className="w-5 h-5 text-blue-500" />
+                        </div>
+                        <span className="text-sm">AI Asistan</span>
+                      </Button>
+                    </Link>
+                    <Link href="/search">
+                      <Button
+                        variant="ghost"
+                        className="w-full h-auto py-4 hover:bg-primary/5 flex flex-col items-center group"
+                      >
+                        <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                          <Search className="w-5 h-5 text-green-500" />
+                        </div>
+                        <span className="text-sm">Ara</span>
+                      </Button>
+                    </Link>
+                    <Link href="/premium">
+                      <Button
+                        variant="ghost"
+                        className="w-full h-auto py-4 hover:bg-primary/5 flex flex-col items-center group"
+                      >
+                        <div className="w-10 h-10 rounded-full bg-purple-500/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                          <Crown className="w-5 h-5 text-purple-500" />
+                        </div>
+                        <span className="text-sm">Premium</span>
+                      </Button>
+                    </Link>
+                  </motion.div>
+                </motion.div>
+              </CardContent>
+            </Card>
+
+            {/* Featured Content Card */}
+            <Card className="col-span-1 overflow-hidden border-none shadow-xl relative group h-full">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="relative aspect-[2/3] rounded-xl overflow-hidden ring-1 ring-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
+                initial={{ opacity: 0, scale: 1.05 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.7 }}
+                className="absolute inset-0"
               >
-                {featuredContent.poster_path && (
+                {featuredContent?.backdrop_path && (
                   <Image
-                    src={`https://image.tmdb.org/t/p/w500${featuredContent.poster_path}`}
+                    src={`https://image.tmdb.org/t/p/w500${featuredContent.backdrop_path}`}
                     alt={
                       featuredContent.title ||
                       featuredContent.name ||
-                      "Movie Poster"
+                      "Featured Content"
                     }
                     fill
-                    className="object-cover"
+                    className="object-cover z-0 group-hover:scale-105 transition-transform duration-700"
                   />
                 )}
               </motion.div>
-            </div>
-
-            {/* Content */}
-            <div className="flex-1 max-w-3xl">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="space-y-6"
-              >
-                <div>
-                  <div className="flex items-center gap-2 mb-4">
-                    <Badge
-                      variant="secondary"
-                      className="text-sm font-medium px-3 py-1"
-                    >
-                      {"title" in featuredContent ? "Film" : "Dizi"}
-                    </Badge>
-                  </div>
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white [text-shadow:_0_2px_8px_rgb(0_0_0_/_20%)]">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-black/30 z-10"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent z-10"></div>
+              <div className="relative z-20 p-6 h-full flex flex-col justify-end">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                >
+                  <Badge
+                    variant="outline"
+                    className="mb-2 w-fit border-white/20 text-white bg-black/40 backdrop-blur-sm"
+                  >
+                    {"title" in featuredContent ? "Film" : "Dizi"}
+                  </Badge>
+                  <h3 className="text-xl font-bold text-white mb-2 line-clamp-2 drop-shadow-md">
                     {featuredContent.title || featuredContent.name}
-                  </h1>
-                  <div className="flex flex-wrap items-center gap-4 text-base mb-6">
-                    <span className="flex items-center gap-2 bg-primary/20 backdrop-blur-sm px-4 py-2 rounded-full text-white font-medium">
-                      <Star className="w-5 h-5 text-yellow-400" />
-                      {featuredContent.vote_average.toFixed(1)} Puan
+                  </h3>
+                  <p className="text-white/80 text-sm mb-4 line-clamp-3 drop-shadow-sm">
+                    {featuredContent.overview}
+                  </p>
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="flex items-center gap-1 text-sm text-white/90 bg-black/30 px-2 py-1 rounded-full backdrop-blur-sm">
+                      <Star className="w-4 h-4 text-yellow-400" />
+                      {featuredContent.vote_average.toFixed(1)}
                     </span>
-                    <span className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-white font-medium">
-                      <Calendar className="w-5 h-5" />
+                    <span className="text-white/50">•</span>
+                    <span className="text-sm text-white/90 bg-black/30 px-2 py-1 rounded-full backdrop-blur-sm">
+                      <Calendar className="w-4 h-4 inline-block mr-1" />
                       {new Date(
                         featuredContent.release_date ||
                           featuredContent.first_air_date ||
@@ -134,75 +245,45 @@ export function HomeClient({
                       ).getFullYear()}
                     </span>
                   </div>
-                </div>
-
-                <p className="text-base md:text-lg leading-relaxed text-white/90 font-medium max-w-2xl">
-                  {featuredContent.overview}
-                </p>
-
-                <div className="flex flex-wrap gap-4 pt-4">
                   <Link
                     href={`/${
                       "title" in featuredContent ? "movies" : "shows"
                     }/${featuredContent.id}`}
                   >
-                    <Button
-                      size="lg"
-                      className="bg-primary hover:bg-primary/90 cursor-pointer text-white font-medium h-12 px-6"
-                    >
-                      <Info className="w-5 h-5 mr-2" />
-                      Detayları Gör
+                    <Button className="w-full bg-primary/90 hover:bg-primary group relative overflow-hidden">
+                      <div className="absolute inset-0 bg-white/10 w-full transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
+                      <Info className="w-4 h-4 mr-2 relative z-10" />
+                      <span className="relative z-10">Detayları Gör</span>
                     </Button>
                   </Link>
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="border-white/20 bg-white/5 hover:bg-white/10 cursor-pointer text-black font-medium h-12 px-6 backdrop-blur-sm"
-                  >
-                    <ListPlus className="w-5 h-5 mr-2" />
-                    Listeme Ekle
-                  </Button>
-                </div>
-              </motion.div>
-            </div>
+                </motion.div>
+              </div>
+            </Card>
           </div>
         </div>
       </section>
 
       {/* Content Sections */}
-      <div className="container mx-auto px-4 py-8 space-y-12">
+      <div className="container mx-auto px-4 py-12 space-y-16">
         {/* Trending Section */}
         <section>
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-3">
-              <TrendingUp className="w-5 h-5 text-primary" />
-              <h2 className="text-xl font-semibold">Trend İçerikler</h2>
-            </div>
-            <div className="flex items-center gap-4">
-              <Link href="/movies/popular">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="group cursor-pointer"
-                >
-                  Tüm Filmler
-                  <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link>
-              <Link href="/shows/popular">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="group cursor-pointer"
-                >
-                  Tüm Diziler
-                  <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link>
-            </div>
+          <div className="flex items-center justify-between mb-8">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="flex items-center gap-3"
+            >
+              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                <TrendingUp className="w-5 h-5 text-primary" />
+              </div>
+              <h2 className="text-2xl font-semibold">Trend İçerikler</h2>
+            </motion.div>
+            <div className="flex items-center gap-4"></div>
           </div>
-          <Tabs defaultValue="movies" className="space-y-6">
-            <TabsList className="bg-background/50 p-1 rounded-lg">
+          <Tabs defaultValue="movies" className="space-y-8">
+            <TabsList className="bg-background/50 p-1 rounded-lg border border-border/30">
               <TabsTrigger
                 value="movies"
                 className="flex items-center gap-2 cursor-pointer"
@@ -219,7 +300,7 @@ export function HomeClient({
               </TabsTrigger>
             </TabsList>
             <TabsContent value="movies">
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
                 {trendingMovies.slice(0, 6).map((movie, index) => (
                   <motion.div
                     key={movie.id}
@@ -227,6 +308,7 @@ export function HomeClient({
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     viewport={{ once: true }}
+                    whileHover={{ y: -5 }}
                   >
                     <MovieCard movie={movie} />
                   </motion.div>
@@ -234,7 +316,7 @@ export function HomeClient({
               </div>
             </TabsContent>
             <TabsContent value="shows">
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
                 {trendingShows.slice(0, 6).map((show, index) => (
                   <motion.div
                     key={show.id}
@@ -242,6 +324,7 @@ export function HomeClient({
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     viewport={{ once: true }}
+                    whileHover={{ y: -5 }}
                   >
                     <MovieCard movie={show} />
                   </motion.div>
@@ -251,71 +334,21 @@ export function HomeClient({
           </Tabs>
         </section>
 
-        {/* Mood Based Recommendations */}
-        <section className="bg-muted/20 -mx-4 px-4 py-12 rounded-3xl">
-          <div className="text-center mb-8">
+        {/* Action Movies */}
+        <section>
+          <div className="flex items-center justify-between mb-8">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
+              className="flex items-center gap-3"
             >
-              <h2 className="text-2xl font-bold mb-3">
-                Ruh Halinize Göre Keşfedin
-              </h2>
-              <p className="text-muted-foreground text-base max-w-2xl mx-auto">
-                CineMind, ruh halinize uygun film önerileri sunar. Şu anki
-                duygularınıza göre size özel seçilmiş filmler keşfedin.
-              </p>
+              <div className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center">
+                <Flame className="w-5 h-5 text-red-500" />
+              </div>
+              <h2 className="text-2xl font-semibold">Aksiyon Filmleri</h2>
             </motion.div>
-          </div>
-          <div className="grid sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
-            <Link href="/recommendations/happy">
-              <motion.div
-                whileHover={{ y: -5 }}
-                className="bg-yellow-500/10 p-6 rounded-xl text-center space-y-3 cursor-pointer"
-              >
-                <Smile className="w-10 h-10 text-yellow-500 mx-auto" />
-                <h3 className="text-lg font-semibold">Mutlu</h3>
-                <p className="text-sm text-muted-foreground">
-                  Keyifli ve eğlenceli filmler
-                </p>
-              </motion.div>
-            </Link>
-            <Link href="/recommendations/excited">
-              <motion.div
-                whileHover={{ y: -5 }}
-                className="bg-red-500/10 p-6 rounded-xl text-center space-y-3 cursor-pointer"
-              >
-                <Zap className="w-10 h-10 text-red-500 mx-auto" />
-                <h3 className="text-lg font-semibold">Heyecanlı</h3>
-                <p className="text-sm text-muted-foreground">
-                  Aksiyon dolu maceralar
-                </p>
-              </motion.div>
-            </Link>
-            <Link href="/recommendations/relaxed">
-              <motion.div
-                whileHover={{ y: -5 }}
-                className="bg-green-500/10 p-6 rounded-xl text-center space-y-3 cursor-pointer"
-              >
-                <Heart className="w-10 h-10 text-green-500 mx-auto" />
-                <h3 className="text-lg font-semibold">Romantik</h3>
-                <p className="text-sm text-muted-foreground">
-                  Duygusal film seçkileri
-                </p>
-              </motion.div>
-            </Link>
-          </div>
-        </section>
-
-        {/* Genre Sections */}
-        <section>
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-semibold flex items-center gap-2">
-              <Film className="w-5 h-5 text-primary" />
-              Aksiyon Filmleri
-            </h2>
             <Link href="/genre/28">
               <Button
                 variant="ghost"
@@ -327,7 +360,7 @@ export function HomeClient({
               </Button>
             </Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
             {actionMovies.slice(0, 6).map((movie, index) => (
               <motion.div
                 key={movie.id}
@@ -335,6 +368,7 @@ export function HomeClient({
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
+                whileHover={{ y: -5 }}
               >
                 <MovieCard movie={movie} />
               </motion.div>
@@ -342,12 +376,21 @@ export function HomeClient({
           </div>
         </section>
 
+        {/* Comedy Movies */}
         <section>
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-semibold flex items-center gap-2">
-              <Smile className="w-5 h-5 text-primary" />
-              Komedi Filmleri
-            </h2>
+          <div className="flex items-center justify-between mb-8">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="flex items-center gap-3"
+            >
+              <div className="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center">
+                <Smile className="w-5 h-5 text-yellow-500" />
+              </div>
+              <h2 className="text-2xl font-semibold">Komedi Filmleri</h2>
+            </motion.div>
             <Link href="/genre/35">
               <Button
                 variant="ghost"
@@ -359,7 +402,7 @@ export function HomeClient({
               </Button>
             </Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
             {comedyMovies.slice(0, 6).map((movie, index) => (
               <motion.div
                 key={movie.id}
@@ -367,6 +410,7 @@ export function HomeClient({
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
+                whileHover={{ y: -5 }}
               >
                 <MovieCard movie={movie} />
               </motion.div>
@@ -374,12 +418,21 @@ export function HomeClient({
           </div>
         </section>
 
+        {/* Drama Movies */}
         <section>
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-semibold flex items-center gap-2">
-              <Heart className="w-5 h-5 text-primary" />
-              Drama Filmleri
-            </h2>
+          <div className="flex items-center justify-between mb-8">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="flex items-center gap-3"
+            >
+              <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center">
+                <Award className="w-5 h-5 text-blue-500" />
+              </div>
+              <h2 className="text-2xl font-semibold">Drama Filmleri</h2>
+            </motion.div>
             <Link href="/genre/18">
               <Button
                 variant="ghost"
@@ -391,7 +444,7 @@ export function HomeClient({
               </Button>
             </Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
             {dramaMovies.slice(0, 6).map((movie, index) => (
               <motion.div
                 key={movie.id}
@@ -399,47 +452,12 @@ export function HomeClient({
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
+                whileHover={{ y: -5 }}
               >
                 <MovieCard movie={movie} />
               </motion.div>
             ))}
           </div>
-        </section>
-
-        {/* Join Section */}
-        <section className="bg-primary/5 -mx-4 px-4 py-16 rounded-3xl text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="max-w-2xl mx-auto space-y-4"
-          >
-            <h2 className="text-2xl font-bold">CineMind'a Katılın</h2>
-            <p className="text-base text-muted-foreground">
-              Kişiselleştirilmiş film önerileri, özel koleksiyonlar ve daha
-              fazlası için hemen ücretsiz hesap oluşturun.
-            </p>
-            <div className="flex justify-center gap-4 pt-2">
-              <Link href="/auth/signin">
-                <Button
-                  size="lg"
-                  className="bg-primary hover:bg-primary/90 cursor-pointer"
-                >
-                  Ücretsiz Başla
-                </Button>
-              </Link>
-              <Link href="/premium">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-primary text-primary hover:bg-primary/10 cursor-pointer"
-                >
-                  Premium'u Keşfet
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
         </section>
       </div>
     </Layout>
