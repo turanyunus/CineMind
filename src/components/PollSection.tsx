@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -42,11 +42,7 @@ export function PollSection({ movieId }: PollSectionProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [showCreateForm, setShowCreateForm] = useState(false);
 
-  useEffect(() => {
-    fetchPolls();
-  }, [movieId]);
-
-  const fetchPolls = async () => {
+  const fetchPolls = useCallback(async () => {
     try {
       const response = await fetch(`/api/polls?movieId=${movieId}`);
       const data = await response.json();
@@ -54,7 +50,11 @@ export function PollSection({ movieId }: PollSectionProps) {
     } catch (error) {
       console.error("Failed to fetch polls:", error);
     }
-  };
+  }, [movieId]);
+
+  useEffect(() => {
+    fetchPolls();
+  }, [fetchPolls]);
 
   const handleCreatePoll = async (e: React.FormEvent) => {
     e.preventDefault();

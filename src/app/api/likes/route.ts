@@ -47,7 +47,7 @@ export async function POST(request: Request) {
     }
 
     // Create new like
-    const like = await prisma.like.create({
+    await prisma.like.create({
       data: {
         userId: user.id,
         movieId: movieId || undefined,

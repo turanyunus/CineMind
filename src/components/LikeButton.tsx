@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
 import { cn } from "@/lib/utils";
@@ -16,13 +16,7 @@ export function LikeButton({ movieId, commentId, reviewId }: LikeButtonProps) {
   const [liked, setLiked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    if (session?.user) {
-      checkLikeStatus();
-    }
-  }, [session, movieId, commentId, reviewId]);
-
-  const checkLikeStatus = async () => {
+  const checkLikeStatus = useCallback(async () => {
     try {
       const params = new URLSearchParams();
       if (movieId) params.append("movieId", movieId);
@@ -35,7 +29,13 @@ export function LikeButton({ movieId, commentId, reviewId }: LikeButtonProps) {
     } catch (error) {
       console.error("Failed to check like status:", error);
     }
-  };
+  }, [movieId, commentId, reviewId]);
+
+  useEffect(() => {
+    if (session?.user) {
+      checkLikeStatus();
+    }
+  }, [session, checkLikeStatus]);
 
   const handleLike = async () => {
     if (!session?.user) return;

@@ -47,9 +47,13 @@ export async function Header() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start">
-                <DropdownMenuItem asChild>
-                  <Link href="/movies/popular" className="w-full">
-                    Popüler Filmler
+                <DropdownMenuItem>
+                  <Link
+                    href="/movies/popular"
+                    className="flex w-full items-center"
+                  >
+                    <Film className="mr-2 h-4 w-4" />
+                    <span>Popüler Filmler</span>
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
@@ -94,7 +98,7 @@ export async function Header() {
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link href="/shows/on-tv" className="w-full">
-                    TV'de Olanlar
+                    TV&apos;de Olanlar
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
@@ -247,7 +251,7 @@ export async function Header() {
                       href="/shows/on-tv"
                       className="block text-muted-foreground hover:text-foreground"
                     >
-                      TV'de Olanlar
+                      TV&apos;de Olanlar
                     </Link>
                     <Link
                       href="/shows/top-rated"

@@ -2,7 +2,6 @@
 
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -14,7 +13,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { TMDBMovie, TMDBShow } from "@/lib/tmdb";
-import { Star, Info, ListPlus, Calendar, Clock } from "lucide-react";
+import { Star, Info, ListPlus, Calendar } from "lucide-react";
 
 interface MovieCardProps {
   movie: TMDBMovie | TMDBShow;

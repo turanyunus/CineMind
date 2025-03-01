@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -32,11 +32,7 @@ export function CommentSection({ movieId }: CommentSectionProps) {
   const [newComment, setNewComment] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    fetchComments();
-  }, [movieId]);
-
-  const fetchComments = async () => {
+  const fetchComments = useCallback(async () => {
     try {
       const response = await fetch(`/api/comments?movieId=${movieId}`);
       const data = await response.json();
@@ -44,7 +40,11 @@ export function CommentSection({ movieId }: CommentSectionProps) {
     } catch (error) {
       console.error("Failed to fetch comments:", error);
     }
-  };
+  }, [movieId]);
+
+  useEffect(() => {
+    fetchComments();
+  }, [fetchComments]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

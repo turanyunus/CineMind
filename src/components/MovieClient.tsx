@@ -13,33 +13,25 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
 import Link from "next/link";
 import { CommentSection } from "@/components/CommentSection";
-import { LikeButton } from "@/components/LikeButton";
 import { PollSection } from "@/components/PollSection";
 import { formatCurrency, formatRuntime } from "@/lib/utils";
 import {
-  Play,
   Star,
   Clock,
   Calendar,
-  Heart,
   MessageCircle,
   Share2,
-  ListPlus,
   Users,
-  DollarSign,
-  Globe,
-  Languages,
   Film,
   ChevronRight,
   Bookmark,
   ThumbsUp,
   Eye,
   Award,
-  Ticket,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { MovieCard } from "@/components/MovieCard";
-import { TMDBMovie, TMDBShow, TMDBCredit, TMDBCredits } from "@/lib/tmdb";
+import { TMDBMovie, TMDBCredits } from "@/lib/tmdb";
 import { Layout } from "@/components/layout/Layout";
 
 interface MovieClientProps {
@@ -56,7 +48,7 @@ interface MovieClientProps {
     voteAverage: number;
     genres: string[];
   };
-  session: any;
+  session: unknown;
 }
 
 export function MovieClient({
@@ -67,9 +59,6 @@ export function MovieClient({
   session,
 }: MovieClientProps) {
   const director = credits?.crew?.find((person) => person.job === "Director");
-  const writers = credits?.crew?.filter(
-    (person) => person.department === "Writing"
-  );
   const cast = credits?.cast?.slice(0, 10) || [];
 
   return (
@@ -126,7 +115,9 @@ export function MovieClient({
                   </div>
                   <CardContent className="p-4 relative z-10">
                     <div className="flex flex-col gap-3">
-                      {session?.user ? (
+                      {session &&
+                      typeof session === "object" &&
+                      "user" in session ? (
                         <>
                           <Button className="w-full bg-primary hover:bg-primary/90 group relative overflow-hidden">
                             <div className="absolute inset-0 bg-white/10 w-full transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
@@ -212,7 +203,7 @@ export function MovieClient({
                       </CardTitle>
                       {movie.tagline && (
                         <CardDescription className="text-base mt-1 italic">
-                          "{movie.tagline}"
+                          &ldquo;{movie.tagline}&rdquo;
                         </CardDescription>
                       )}
                     </motion.div>

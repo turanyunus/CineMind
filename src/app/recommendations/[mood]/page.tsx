@@ -1,7 +1,5 @@
-import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -34,15 +32,13 @@ const moods = {
   },
 };
 
-interface RecommendationsPageProps {
+type PageProps = {
   params: {
     mood: string;
   };
-}
+};
 
-export default async function RecommendationsPage({
-  params,
-}: RecommendationsPageProps) {
+export default async function RecommendationsPage({ params }: PageProps) {
   const mood = params.mood.toLowerCase();
 
   if (!moods[mood as keyof typeof moods]) {

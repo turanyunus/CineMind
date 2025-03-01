@@ -13,10 +13,15 @@ import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 import Link from "next/link";
 import { MovieCard } from "@/components/MovieCard";
-import { motion } from "framer-motion";
 import { Layout } from "@/components/layout/Layout";
 
-interface DBMovie {
+// Tip tanımlamaları
+interface Review {
+  id: string;
+  rating: number;
+}
+
+interface Movie {
   id: string;
   tmdbId: number;
   title: string;
@@ -26,10 +31,9 @@ interface DBMovie {
   overview: string | null;
 }
 
-interface User {
+interface Follower {
   id: string;
   name: string | null;
-  email: string | null;
   image: string | null;
 }
 
@@ -135,7 +139,7 @@ export default async function ProfilePage() {
                   {user.reviews.length > 0
                     ? (
                         user.reviews.reduce(
-                          (acc: number, rev: any) => acc + rev.rating,
+                          (acc: number, rev: Review) => acc + rev.rating,
                           0
                         ) / user.reviews.length
                       ).toFixed(1)
@@ -171,7 +175,7 @@ export default async function ProfilePage() {
                     </Card>
                   </div>
                 ) : (
-                  user.watchlist.map((movie: any) => (
+                  user.watchlist.map((movie: Movie) => (
                     <div key={movie.id}>
                       <MovieCard
                         movie={{
@@ -208,7 +212,7 @@ export default async function ProfilePage() {
                     </Card>
                   </div>
                 ) : (
-                  user.watched.map((movie: any) => (
+                  user.watched.map((movie: Movie) => (
                     <div key={movie.id}>
                       <MovieCard
                         movie={{
@@ -240,7 +244,7 @@ export default async function ProfilePage() {
                     </Card>
                   </div>
                 ) : (
-                  user.followers.map((follower: any) => (
+                  user.followers.map((follower: Follower) => (
                     <Card key={follower.id} className="p-4">
                       <div className="flex items-center gap-3">
                         <div className="relative w-12 h-12 rounded-full overflow-hidden">
@@ -281,7 +285,7 @@ export default async function ProfilePage() {
                     </Card>
                   </div>
                 ) : (
-                  user.following.map((following: any) => (
+                  user.following.map((following: Follower) => (
                     <Card key={following.id} className="p-4">
                       <div className="flex items-center gap-3">
                         <div className="relative w-12 h-12 rounded-full overflow-hidden">

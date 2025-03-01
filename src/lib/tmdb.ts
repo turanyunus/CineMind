@@ -29,23 +29,6 @@ tmdbApi.interceptors.response.use(
   }
 );
 
-interface Genre {
-  id: number;
-  name: string;
-}
-
-interface ProductionCompany {
-  id: number;
-  name: string;
-  logo_path: string | null;
-  origin_country: string;
-}
-
-interface ProductionCountry {
-  iso_3166_1: string;
-  name: string;
-}
-
 export interface TMDBMovie {
   id: number;
   title: string;

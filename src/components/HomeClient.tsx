@@ -1,13 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,21 +9,15 @@ import { MovieCard } from "@/components/MovieCard";
 import { motion } from "framer-motion";
 import { TMDBMovie, TMDBShow } from "@/lib/tmdb";
 import {
-  ArrowRight,
-  Play,
   Star,
   Calendar,
-  ListPlus,
-  Heart,
   TrendingUp,
-  Clock,
   Award,
   Film,
   Smile,
   Zap,
   Search,
   Tv,
-  Menu,
   ChevronRight,
   Info,
   Sparkles,
